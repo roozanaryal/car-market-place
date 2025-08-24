@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Heart } from "lucide-react";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -81,7 +81,9 @@ export default function CarCard({
             }}
           >
             <Heart
-              className={`h-4 w-4 transition-transform duration-300 ${wishlisted ? "fill-current" : ""}`}
+              className={`h-4 w-4 transition-transform duration-300 ${
+                wishlisted ? "fill-current" : ""
+              }`}
             />
           </Button>
         </div>
@@ -100,10 +102,16 @@ export default function CarCard({
           {year} • {transmission} • {fuelType}
         </div>
         <div className="flex flex-wrap gap-1 mb-3">
-          <Badge variant="secondary" className="bg-neutral-100 text-neutral-700 border-0 px-1.5 py-0.5 rounded text-xs">
+          <Badge
+            variant="secondary"
+            className="bg-neutral-100 text-neutral-700 border-0 px-1.5 py-0.5 rounded text-xs"
+          >
             {bodyType}
           </Badge>
-          <Badge variant="secondary" className="bg-neutral-100 text-neutral-700 border-0 px-1.5 py-0.5 rounded text-xs">
+          <Badge
+            variant="secondary"
+            className="bg-neutral-100 text-neutral-700 border-0 px-1.5 py-0.5 rounded text-xs"
+          >
             {mileage.toLocaleString()} mi
           </Badge>
         </div>

@@ -16,7 +16,6 @@ import Image from "next/image";
 import { bodyTypes, carMakes, faqItems } from "@/lib/data";
 
 export default async function Home() {
-
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -28,7 +27,8 @@ export default async function Home() {
                 Find Your Dream Car with GadiBaazar
               </h1>
               <p className="text-body-lg text-white/90 mb-8 max-w-2xl mx-auto">
-                Advanced AI Car Search and test drive from thousands of verified vehicles with cutting-edge technology.
+                Advanced AI Car Search and test drive from thousands of verified
+                vehicles with cutting-edge technology.
               </p>
             </div>
 
@@ -45,9 +45,7 @@ export default async function Home() {
         <div className="section-spacing">
           <div className="container-spacing">
             <div className="text-center large-spacing">
-              <h2 className="heading-lg element-spacing">
-                Featured Cars
-              </h2>
+              <h2 className="heading-lg element-spacing">Featured Cars</h2>
               <p className="text-body-lg max-w-2xl mx-auto element-spacing">
                 Discover our handpicked selection of premium vehicles
               </p>
@@ -67,9 +65,7 @@ export default async function Home() {
         <div className="section-spacing">
           <div className="container-spacing">
             <div className="text-center large-spacing">
-              <h2 className="heading-lg element-spacing">
-                Browse by Make
-              </h2>
+              <h2 className="heading-lg element-spacing">Browse by Make</h2>
               <p className="text-body-lg max-w-2xl mx-auto element-spacing">
                 Explore vehicles from your favorite automotive brands
               </p>
@@ -96,7 +92,9 @@ export default async function Home() {
                       style={{ objectFit: "contain" }}
                     />
                   </div>
-                  <h3 className="text-sm font-medium text-neutral-800">{make.name}</h3>
+                  <h3 className="text-sm font-medium text-neutral-800">
+                    {make.name}
+                  </h3>
                 </Link>
               ))}
             </div>
@@ -143,8 +141,8 @@ export default async function Home() {
                 </div>
                 <h3 className="heading-md element-spacing">Secure Process</h3>
                 <p className="text-body">
-                  Verified listings and secure booking process with comprehensive
-                  insurance coverage for complete peace of mind.
+                  Verified listings and secure booking process with
+                  comprehensive insurance coverage for complete peace of mind.
                 </p>
               </div>
             </div>
@@ -208,15 +206,23 @@ export default async function Home() {
                 Frequently Asked Questions
               </h2>
               <p className="text-body-lg max-w-2xl mx-auto">
-                Get answers to common questions about our platform
+                Get answers to common questions in GadiBazaar
               </p>
             </div>
             <div className="max-w-4xl mx-auto">
               <Accordion type="single" collapsible className="w-full space-y-2">
                 {faqItems.map((faq, index) => (
-                  <AccordionItem key={index} value={`item-${index}`} className="accordion-item">
-                    <AccordionTrigger className="accordion-trigger text-left">{faq.question}</AccordionTrigger>
-                    <AccordionContent className="accordion-content">{faq.answer}</AccordionContent>
+                  <AccordionItem
+                    key={index}
+                    value={`item-${index}`}
+                    className="accordion-item"
+                  >
+                    <AccordionTrigger className="accordion-trigger text-left">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="accordion-content mt-3">
+                      {faq.answer}
+                    </AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
@@ -238,7 +244,12 @@ export default async function Home() {
                 vehicle through our innovative platform.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button size="lg" variant="secondary" className="btn-secondary bg-white text-primary-blue" asChild>
+                <Button
+                  size="lg"
+                  variant="secondary"
+                  className="btn-secondary bg-white text-primary-blue"
+                  asChild
+                >
                   <Link href="/cars">View All Cars</Link>
                 </Button>
                 <SignedOut>

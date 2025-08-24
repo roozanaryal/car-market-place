@@ -1,64 +1,93 @@
-"use client";
-
-import Link from "next/link";
+import React from "react";
 import { Button } from "@/components/ui/button";
+import { Heart, CarFront, Layout, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { checkUser } from "@/lib/checkUser";
 import Image from "next/image";
 
-export default function Header() {
+const Header = async ({ isAdminPage = false }) => {
+  const user = await checkUser();
+  const isAdmin = user?.role === "ADMIN";
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-200">
-      <div className="container-spacing">
-        <div className="flex-between py-4">
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="bg-primary-dark rounded-lg h-7 flex items-center justify-center">
-              <Image
-                src="/logo.png"
-                alt="GadiBaazar"
-                width={100}
-                height={100}
-                className=" object-contain"
-                priority
-              />
-            </div>
-          </Link>
+    <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b px-4">
+      <nav className="mx-auto px-4 h-20 py-2 flex items-center justify-between">
+        <Link href={isAdminPage ? "/admin" : "/"} className="flex">
+          <Image
+            src={"/logo.png"}
+            alt="GadiBazaar"
+            width={100}
+            height={100}
+            className="w-auto object-contain"
+          />
+          {isAdminPage && (
+            <span className="text-xs font-extralight">admin</span>
+          )}
+        </Link>
 
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/cars"
-              className="text-body hover:text-accent-gold transition-colors"
-            >
-              Browse Cars
-            </Link>
-            <Link
-              href="/sell"
-              className="text-body hover:text-accent-gold transition-colors"
-            >
-              Sell Your Car
-            </Link>
-            <Link
-              href="/about"
-              className="text-body hover:text-accent-gold transition-colors"
-            >
-              About
-            </Link>
-            <Link
-              href="/contact"
-              className="text-body hover:text-accent-gold transition-colors"
-            >
-              Contact
-            </Link>
-          </nav>
+        {/* Action Buttons */}
+        <div className="flex items-center space-x-4">
+          {isAdminPage ? (
+            <>
+              <Link href="/">
+                <Button variant="outline" className="flex items-center gap-2">
+                  <ArrowLeft size={18} />
+                  <span>Back to App</span>
+                </Button>
+              </Link>
+            </>
+          ) : (
+            <SignedIn>
+              {!isAdmin && (
+                <Link
+                  href="/reservations"
+                  className="text-gray-600 hover:text-blue-600 flex items-center gap-2"
+                >
+                  <Button variant="outline">
+                    <CarFront size={18} />
+                    <span className="hidden md:inline">My Reservations</span>
+                  </Button>
+                </Link>
+              )}
+              <a href="/saved-cars">
+                <Button className="flex items-center gap-2">
+                  <Heart size={18} />
+                  <span className="hidden md:inline">Saved Cars</span>
+                </Button>
+              </a>
+              {isAdmin && (
+                <Link href="/admin">
+                  <Button variant="outline" className="flex items-center gap-2">
+                    <Layout size={18} />
+                    <span className="hidden md:inline">Admin Portal</span>
+                  </Button>
+                </Link>
+              )}
+            </SignedIn>
+          )}
 
-          <div className="flex items-center space-x-4">
-            <Button variant="outline" className="btn-secondary" asChild>
-              <Link href="/sign-in">Sign In</Link>
-            </Button>
-            <Button className="btn-primary" asChild>
-              <Link href="/sign-up">Get Started</Link>
-            </Button>
-          </div>
+          <SignedOut>
+            {!isAdminPage && (
+              <SignInButton forceRedirectUrl="/">
+                <Button variant="outline">Login</Button>
+              </SignInButton>
+            )}
+          </SignedOut>
+
+          <SignedIn>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "w-10 h-10",
+                },
+              }}
+            />
+          </SignedIn>
         </div>
-      </div>
+      </nav>
     </header>
   );
-}
+};
+
+export default Header;
