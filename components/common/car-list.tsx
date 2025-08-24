@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import CarCard, { Car } from "@/components/car-card";
+import CarCard, { Car } from "@/components/cards/car-card";
 import { featuredCars as initialData } from "@/lib/data";
 
 export default function CarList() {
@@ -14,7 +14,7 @@ export default function CarList() {
   };
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid-auto">
       {cars.map((car) => (
         <CarCard key={car.id} car={car} onToggleWishlist={toggleWishlist} />
       ))}

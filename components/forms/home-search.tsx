@@ -110,47 +110,51 @@ export function HomeSearch() {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <form onSubmit={handleTextSearch}>
-        <div className="relative flex items-center">
-          <Search className="absolute left-3 w-5 h-5" />
-          <Input
+        <div className="search-container flex items-center max-w-2xl mx-auto">
+          <input
             type="text"
-            placeholder="Enter make, model, or use our AI Image Search..."
+            placeholder="Search for your dream car..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-12 py-6 w-full rounded-full border-gray-300 bg-white/95 backdrop-blur-sm"
+            className="search-input flex-1"
           />
 
           {/* Image Search Button */}
           <div className="absolute right-[100px]">
-            <Camera
-              size={35}
+            <div
               onClick={() => setIsImageSearchActive(!isImageSearchActive)}
-              className="cursor-pointer rounded-xl p-1.5"
-              style={{
-                background: isImageSearchActive ? "black" : "",
-                color: isImageSearchActive ? "white" : "",
-              }}
-            />
+              className={`cursor-pointer rounded-full p-3 transition-all duration-300 ${
+                isImageSearchActive 
+                  ? "bg-accent-gold text-white shadow-lg" 
+                  : "bg-white/90 text-neutral-600 hover:bg-accent-gold hover:text-white shadow-md"
+              }`}
+            >
+              <Camera size={20} />
+            </div>
           </div>
 
-          <Button type="submit" className="absolute right-2 rounded-full">
+          <Button 
+            type="submit" 
+            className="btn-primary absolute right-2 rounded-full px-6 py-3 shadow-lg hover:shadow-xl transition-all duration-300"
+          >
+            <Search size={18} className="mr-2" />
             Search
           </Button>
         </div>
       </form>
 
       {isImageSearchActive && (
-        <div className="mt-4">
+        <div className="mt-6">
           <form onSubmit={handleImageSearch} className="space-y-4">
-            <div className="border-2 border-dashed border-gray-300 rounded-3xl p-6 text-center">
+            <div className="professional-card p-6 text-center">
               {imagePreview ? (
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center space-y-4">
                   <img
                     src={imagePreview}
                     alt="Car preview"
-                    className="h-40 object-contain mb-4"
+                    className="h-40 object-contain rounded-lg"
                   />
                   <Button
                     variant="outline"
@@ -159,6 +163,7 @@ export function HomeSearch() {
                       setImagePreview(null);
                       toast.info("Image removed");
                     }}
+                    className="btn-secondary"
                   >
                     Remove Image
                   </Button>
@@ -166,19 +171,23 @@ export function HomeSearch() {
               ) : (
                 <div {...getRootProps()} className="cursor-pointer">
                   <input {...getInputProps()} />
-                  <div className="flex flex-col items-center">
-                    <Upload className="h-12 w-12 text-gray-400 mb-2" />
-                    <p className="text-gray-500 mb-2">
-                      {isDragActive && !isDragReject
-                        ? "Leave the file here to upload"
-                        : "Drag & drop a car image or click to select"}
-                    </p>
-                    {isDragReject && (
-                      <p className="text-red-500 mb-2">Invalid image type</p>
-                    )}
-                    <p className="text-gray-400 text-sm">
-                      Supports: JPG, PNG (max 5MB)
-                    </p>
+                  <div className="flex flex-col items-center space-y-4">
+                    <div className="p-4 bg-neutral-100 rounded-full">
+                      <Upload className="h-12 w-12 text-primary-dark" />
+                    </div>
+                    <div className="space-y-2">
+                      <p className="font-medium text-neutral-900">
+                        {isDragActive && !isDragReject
+                          ? "Drop your car image here"
+                          : "Drag & drop a car image or click to select"}
+                      </p>
+                      {isDragReject && (
+                        <p className="text-red-500">Invalid image type - please use JPG or PNG</p>
+                      )}
+                      <p className="text-body text-sm">
+                        Supports: JPG, PNG (max 5MB)
+                      </p>
+                    </div>
                   </div>
                 </div>
               )}
@@ -187,7 +196,7 @@ export function HomeSearch() {
             {imagePreview && (
               <Button
                 type="submit"
-                className="w-full"
+                className="btn-primary w-full py-3"
                 disabled={isUploading || isProcessing}
               >
                 {isUploading
