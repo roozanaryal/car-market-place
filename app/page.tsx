@@ -7,8 +7,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { SignedOut } from "@clerk/nextjs";
-// import { getFeaturedCars } from "@/actions/home";
-import CarCard from "@/components/cards/car-card";
 import { HomeSearch } from "@/components/forms/home-search";
 import CarList from "@/components/common/car-list";
 import Link from "next/link";
@@ -19,22 +17,52 @@ export default async function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="hero-background text-white overflow-hidden pt-20">
-        <div className="section-spacing">
-          <div className="container-spacing text-center relative z-10">
-            <div className="large-spacing">
-              <h1 className="heading-xl text-white mb-6">
-                Find Your Dream Car with GadiBaazar
-              </h1>
-              <p className="text-body-lg text-white/90 mb-8 max-w-2xl mx-auto">
-                Advanced AI Car Search and test drive from thousands of verified
-                vehicles with cutting-edge technology.
-              </p>
-            </div>
+      <section className="hero-background hero-fade-bottom overflow-hidden pt-28 pb-14">
+        <div className="container-spacing text-center relative z-10">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 ring-1 ring-emerald-200 text-emerald-700 mb-6">
+            <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
+            <span className="text-xs tracking-wide uppercase">AI Powered Search</span>
+          </div>
 
-            {/* Search Component */}
-            <div className="max-w-2xl mx-auto">
-              <HomeSearch />
+          {/* Headline */}
+          <h1 className="heading-xl text-neutral-900 mb-4">
+            Find Your Dream Car with GadiBaazar
+          </h1>
+          <p className="text-body-lg text-neutral-700 mb-8 max-w-2xl mx-auto">
+            Advanced AI Car Search and test drive from thousands of verified vehicles with cutting-edge technology.
+          </p>
+
+          {/* Search Component */}
+          <div className="max-w-2xl mx-auto mb-6">
+            <HomeSearch />
+          </div>
+
+          {/* CTAs */}
+          <div className="flex justify-center gap-3 mb-10">
+            {/* <Button size="lg" className="btn-primary" asChild>
+              <Link href="/cars">Browse Cars</Link>
+            </Button> */}
+            <SignedOut>
+              <Button size="lg" variant="secondary" className="btn-secondary" asChild>
+                <Link href="/sign-up">Get Started</Link>
+              </Button>
+            </SignedOut>
+          </div>
+
+          {/* Trust stats */}
+          <div className="grid grid-cols-3 gap-6 max-w-3xl mx-auto text-neutral-700">
+            <div>
+              <div className="text-2xl font-semibold text-neutral-900">5k+</div>
+              <div className="text-sm">Verified Listings</div>
+            </div>
+            <div>
+              <div className="text-2xl font-semibold text-neutral-900">1.5k+</div>
+              <div className="text-sm">Happy Buyers</div>
+            </div>
+            <div>
+              <div className="text-2xl font-semibold text-neutral-900">4.9/5</div>
+              <div className="text-sm">Average Rating</div>
             </div>
           </div>
         </div>
@@ -232,14 +260,14 @@ export default async function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="hero-background text-white">
+      <section className="hero-background text-black">
         <div className="section-spacing">
           <div className="container-spacing text-center relative z-10">
             <div className="max-w-4xl mx-auto">
-              <h2 className="heading-lg text-white mb-6">
+              <h2 className="heading-lg text-black mb-6">
                 Ready to Find Your Dream Car?
               </h2>
-              <p className="text-body-lg text-white/90 mb-8 max-w-3xl mx-auto">
+              <p className="text-body-lg text-black/90 mb-8 max-w-3xl mx-auto">
                 Join thousands of satisfied customers who found their perfect
                 vehicle through our innovative platform.
               </p>
@@ -247,13 +275,13 @@ export default async function Home() {
                 <Button
                   size="lg"
                   variant="secondary"
-                  className="btn-secondary bg-white text-primary-blue"
+                  className="btn-secondary bg-black text-primary-blue"
                   asChild
                 >
                   <Link href="/cars">View All Cars</Link>
                 </Button>
                 <SignedOut>
-                  <Button size="lg" className="btn-primary" asChild>
+                  <Button size="lg" className="btn-primary bg-black" asChild>
                     <Link href="/sign-up">Sign Up Now</Link>
                   </Button>
                 </SignedOut>

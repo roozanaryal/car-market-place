@@ -141,7 +141,7 @@ export function HomeSearch() {
             aria-label="Search"
             className="rounded-full p-3 bg-primary-dark text-white hover:bg-primary-dark-light shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            <Search size={18} />
+            <Search size={18} className="text-black" />
           </button>
         </div>
       </form>
