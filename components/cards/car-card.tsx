@@ -51,16 +51,16 @@ export default function CarCard({
   const img = images?.[0] ?? "/placeholder.svg";
 
   return (
-    <Card className="car-card group cursor-pointer">
-      <div className="relative">
-        <div className="car-card-image aspect-[5/4] relative overflow-hidden rounded-t-[12px]">
+    <Card className="car-card group cursor-pointer p-0">
+      <div className="relative m-0">
+        <div className="car-card-image relative block m-0 w-full h-44 md:h-52 overflow-hidden">
           <Image
             src={img}
             alt={`${make} ${model}`}
             fill
-            className="object-cover"
+            className="object-cover object-top w-full h-full"
           />
-          <div className="absolute top-3 left-3 flex gap-1.5">
+          <div className="absolute top-0 left-0 m-3 flex gap-1.5">
             {year >= 2020 && (
               <Badge className="bg-accent-emerald text-white px-2 py-1 text-xs font-medium rounded-full">
                 New
@@ -70,7 +70,7 @@ export default function CarCard({
           <Button
             variant="ghost"
             size="icon"
-            className={`absolute top-3 right-3 h-8 w-8 rounded-full transition-all duration-300 ${
+            className={`absolute top-0 right-0 m-3 h-8 w-8 rounded-full transition-all duration-300 ${
               wishlisted
                 ? "bg-red-100 text-red-600 hover:bg-red-200"
                 : "bg-white/80 text-neutral-600 hover:bg-white hover:text-red-600"

@@ -25,7 +25,7 @@ export default async function Home() {
           <div className="container-spacing text-center relative z-10">
             <div className="large-spacing">
               <h1 className="heading-xl text-white mb-6">
-                Find Your Dream Car with Vehiql AI
+                Find Your Dream Car with GadiBaazar
               </h1>
               <p className="text-body-lg text-white/90 mb-8 max-w-2xl mx-auto">
                 Advanced AI Car Search and test drive from thousands of verified vehicles with cutting-edge technology.
@@ -212,11 +212,11 @@ export default async function Home() {
               </p>
             </div>
             <div className="max-w-4xl mx-auto">
-              <Accordion type="single" collapsible className="w-full space-y-4">
+              <Accordion type="single" collapsible className="w-full space-y-2">
                 {faqItems.map((faq, index) => (
-                  <AccordionItem key={index} value={`item-${index}`} className="professional-card border-0">
-                    <AccordionTrigger className="card-spacing text-left font-semibold hover:bg-neutral-50">{faq.question}</AccordionTrigger>
-                    <AccordionContent className="px-6 pb-6 text-body">{faq.answer}</AccordionContent>
+                  <AccordionItem key={index} value={`item-${index}`} className="accordion-item">
+                    <AccordionTrigger className="accordion-trigger text-left">{faq.question}</AccordionTrigger>
+                    <AccordionContent className="accordion-content">{faq.answer}</AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>

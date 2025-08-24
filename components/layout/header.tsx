@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Car } from "lucide-react";
+import Image from "next/image";
 
 export default function Header() {
   return (
@@ -10,23 +10,41 @@ export default function Header() {
       <div className="container-spacing">
         <div className="flex-between py-4">
           <Link href="/" className="flex items-center space-x-2">
-            <div className="bg-primary-dark rounded-lg p-2">
-              <Car className="h-5 w-5 text-white" />
+            <div className="bg-primary-dark rounded-lg h-7 flex items-center justify-center">
+              <Image
+                src="/logo.png"
+                alt="GadiBaazar"
+                width={100}
+                height={100}
+                className=" object-contain"
+                priority
+              />
             </div>
-            <span className="text-xl font-bold text-neutral-900">Vehiql</span>
           </Link>
-          
+
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/cars" className="text-body hover:text-accent-gold transition-colors">
+            <Link
+              href="/cars"
+              className="text-body hover:text-accent-gold transition-colors"
+            >
               Browse Cars
             </Link>
-            <Link href="/sell" className="text-body hover:text-accent-gold transition-colors">
+            <Link
+              href="/sell"
+              className="text-body hover:text-accent-gold transition-colors"
+            >
               Sell Your Car
             </Link>
-            <Link href="/about" className="text-body hover:text-accent-gold transition-colors">
+            <Link
+              href="/about"
+              className="text-body hover:text-accent-gold transition-colors"
+            >
               About
             </Link>
-            <Link href="/contact" className="text-body hover:text-accent-gold transition-colors">
+            <Link
+              href="/contact"
+              className="text-body hover:text-accent-gold transition-colors"
+            >
               Contact
             </Link>
           </nav>
