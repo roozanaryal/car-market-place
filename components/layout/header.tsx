@@ -11,7 +11,7 @@ const Header = async ({ isAdminPage = false }) => {
   const isAdmin = user?.role === "ADMIN";
 
   return (
-    <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b px-4">
+    <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 px-4">
       <nav className="mx-auto px-4 h-20 py-2 flex items-center justify-between">
         <Link href={isAdminPage ? "/admin" : "/"} className="flex">
           <Image
