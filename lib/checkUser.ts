@@ -1,28 +1,30 @@
 import { currentUser } from "@clerk/nextjs/server";
+import { db } from "./prisma";
 
-export type AppUser = {
-  id: string;
-  email?: string;
-  name?: string;
-  role?: "ADMIN" | "USER" | string;
-};
-
-export async function checkUser(): Promise<AppUser | null> {
+export const checkUser = async () => {
   const user = await currentUser();
-  if (!user) return null;
-
-  const role =
-    (user.publicMetadata?.role as string | undefined) ??
-    (user.privateMetadata?.role as string | undefined) ??
-    "USER";
-
-  return {
-    id: user.id,
-    email: user.emailAddresses?.[0]?.emailAddress,
-    name:
-      user.firstName && user.lastName
-        ? `${user.firstName} ${user.lastName}`
-        : user.username || undefined,
-    role,
-  };
-}
+  if (!user) {
+    return null;
+  }
+  try {
+    const loggedInUser = await db.user.findUnique({
+      where: {
+        clerkUserId: user.id,
+      },
+    });
+    if (loggedInUser) {
+      return loggedInUser;
+    }
+    const newUser = await db.user.create({
+      data: {
+        clerkUserId: user.id,
+        email: user.emailAddresses[0].emailAddress,
+        imageUrl: user.imageUrl,
+        name: `${user.firstName} ${user.lastName}`,
+      },
+    });
+    return newUser;
+  } catch (error) {
+    console.log(error);
+  }
+};
