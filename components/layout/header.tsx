@@ -6,6 +6,8 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { checkUser } from "@/lib/checkUser";
 import Image from "next/image";
 
+export const dynamic = "force-dynamic";
+
 const Header = async ({ isAdminPage = false }) => {
   const user = await checkUser();
   const isAdmin = user?.role === "ADMIN";

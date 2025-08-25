@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Header from "@/components/layout/header";
 
+export const dynamic = "force-dynamic";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

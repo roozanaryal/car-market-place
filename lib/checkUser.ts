@@ -1,12 +1,14 @@
-import { currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { db } from "./prisma";
 
 export const checkUser = async () => {
-  const user = await currentUser();
-  if (!user) {
-    return null;
-  }
+  // Ensure Clerk middleware context is available and user is authenticated
   try {
+    const { userId } = await auth();
+    if (!userId) return null;
+
+    const user = await currentUser();
+    if (!user) return null;
     const loggedInUser = await db.user.findUnique({
       where: {
         clerkUserId: user.id,
@@ -25,6 +27,8 @@ export const checkUser = async () => {
     });
     return newUser;
   } catch (error) {
-    console.log(error);
+    // If Clerk context isn't available or any other error occurs, fail gracefully
+    console.log("checkUser error:", error);
+    return null;
   }
 };

@@ -53,10 +53,10 @@ export const featuredCars = [
   ];
   
   export const bodyTypes = [
-    { id: 1, name: "SUV", image: "/body/suv.webp" },
+    { id: 1, name: "SUV", image: "/body/suv.png" },
     { id: 2, name: "Sedan", image: "/body/sedan.webp" },
-    { id: 3, name: "Hatchback", image: "/body/hatchback.webp" },
-    { id: 4, name: "Convertible", image: "/body/convertible.webp" },
+    { id: 3, name: "Hatchback", image: "/body/hatchback.jpeg" },
+    { id: 4, name: "Convertible", image: "/body/convertable.png" },
   ];
   
   export const faqItems = [

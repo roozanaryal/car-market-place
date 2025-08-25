@@ -205,11 +205,16 @@ export default async function Home() {
                   <div className="relative h-32 w-full">
                     <Image
                       src={
-                        type.image || `/body/${type.name.toLowerCase()}.webp`
+                        type.image || 
+                        (type.name.toLowerCase() === 'convertible' ? '/body/convertable.png' : 
+                         type.name.toLowerCase() === 'hatchback' ? '/body/hatchback.jpeg' :
+                         type.name.toLowerCase() === 'suv' ? '/body/suv.png' :
+                         type.name.toLowerCase() === 'sedan' ? '/body/sedan.webp' :
+                         '')
                       }
                       alt={type.name}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-300 ease-out group-hover:scale-110 will-change-transform transform-gpu"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-4">
